@@ -3,38 +3,7 @@ import numpy as np
 from scipy import integrate
 
 
-def integral(f, a, b, p, p_args, moments, gauss=False, optimal=False, step_number=2, r=3, error=10 ** (-6)):
-    if not gauss:  # метод Ньютона-Котса
-        x = np.array([a, (a + b) / 2, b], dtype=float)
-        xes = np.array([x ** i for i in range(len(x))], dtype=float)
-
-        A = np.linalg.solve(xes, moments.transpose())
-
-    else:  # метод Гаусса
-        temp_system = np.array(
-            [[moments[i + j] for j in range(int((len(moments) + 1) / 2))] for i in range(int((len(moments) + 1) / 2))],
-            dtype=float
-        )
-        temp_b = np.array(
-            [-moments[int((len(moments) + 1) / 2) + s] for s in range(int((len(moments) + 1) / 2))],
-            dtype=float
-        )
-        w = np.linalg.solve(temp_system, temp_b.transpose())
-        w_roots = np.roots(w)
-
-        xes = np.array([w_roots ** i for i in range(len(w_roots))], dtype=float)
-        A = np.linalg.solve(xes, moments[:int((len(moments) + 1) / 2)])
-
-    # модуль 3ей производной заданной функции f(x) < 360 на [1.8, 2.9]
-    e = 0
-    # e = (360 / 6) * (
-    #     integrate.quad(
-    #         lambda y: abs(p(y, a, b, p_args[0], p_args[1]) * ((x - x[0]) * (x - x[1]) * (x - x[2]))),
-    #         1.8,
-    #         2.9
-    #     )[0]
-    # )
-
+def newton_cots(f, a, b, p, p_args, moments, optimal=False, step_number=2, r=3, error=10 ** (-6)): # метод Ньютона-Котса
     L = 2
     S = np.array([], dtype=float)
     H_begin = np.array([], dtype=float)
@@ -47,7 +16,10 @@ def integral(f, a, b, p, p_args, moments, gauss=False, optimal=False, step_numbe
         x = np.append(x, b)
         s = 0
         for i in range(len(x) - 1):
-            current_interval = [x[i], (x[i + 1] + x[i]) / 2, x[i + 1]]
+            current_interval = np.array([x[i], (x[i + 1] + x[i]) / 2, x[i + 1]], dtype=float)
+            moments_values = [m(current_interval[0], current_interval[2]) for m in moments]
+            xes = np.array([current_interval ** i for i in range(len(current_interval))], dtype=float)
+            A = np.linalg.solve(xes, moments_values)
             for m in range(len(current_interval)):
                 s += A[m] * f(current_interval[m])
         S = np.append(S, s)
@@ -114,6 +86,25 @@ def P(x, a, b, alpha, beta):
 
 def F(x):
     return 4 * math.cos(2.5 * x) * math.exp((4 * x) / 7) + 2.5 * math.sin(5.5 * x) * math.exp(-(3 * x) / 5) + 4.3 * x
+
+
+def m0(a, b):
+    return (-2 + 1/3)*(((2.9 - b)**(3/7)) - ((2.9 - a)**(3/7)))
+
+def m1(a, b):
+    return
+
+def m2(a, b):
+    return
+
+def m3(a, b):
+    return
+
+def m4(a, b):
+    return
+
+def m5(a, b):
+    return
 
 
 def main():
