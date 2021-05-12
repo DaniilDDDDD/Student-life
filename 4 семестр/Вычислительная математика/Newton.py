@@ -170,8 +170,8 @@ def solve_LU(L, U, P, Q, b, count_operations=False):
         for j in U[i]:
             if abs(j) >= 1e-12:
                 flag = False
+                count += 1
                 break
-                count += 3
             count += 1
         if flag:
             rank -= 1
@@ -266,12 +266,6 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
 
         L, U, P, Q, n = LU_decomposition(J(x_previous), count_operations=count_operations)
 
-        # k += n
-        # J_inv, n = inverse_matrix(L, U, P, Q, count_operations=count_operations)
-        # k += n
-
-        # x = x_previous - np.dot(J_inv, F(x_previous))
-        # k += 3
         temp, n = solve_LU(L, U, P, Q, -F(x_previous), count_operations=True)
         x = x_previous + temp
         k += n + 1
@@ -282,12 +276,9 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
             if iterations % period == 0:
                 L, U, P, Q, n = LU_decomposition(J(x_previous), count_operations=True)
                 k += n
-                # J_inv, n = inverse_matrix(L, U, P, Q, count_operations=True)
-                # k += n + 6
 
             temp, n = solve_LU(L, U, P, Q, -F(x_previous), count_operations=True)
             x = x_previous + temp
-            # x = x_previous - np.dot(J_inv, F(x_previous))
             iterations += 1
             k += 1 + n
 
@@ -295,7 +286,6 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
             x_previous = x.copy()
             temp, n = solve_LU(L, U, P, Q, -F(x_previous), count_operations=True)
             x = x_previous + temp
-            # x = x_previous - np.dot(J_inv, F(x_previous))
             iterations += 1
             k += 1 + n
 
@@ -318,51 +308,68 @@ def main():
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(F_scalar, J_scalar, x_0, e=0.0001, system=False, modified=500, period=1,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(F_scalar, J_scalar, x_0, e=0.0001, system=False, modified=500,
+                                                 period=1,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
 
-    print('Проверка F(x)==0:')
-    print(F_scalar(x))
-    print()
+        print(f'Количество операций: {operations}')
+        print()
+
+        print('Проверка F(x)==0:')
+        print(F_scalar(x))
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
     print('Модифицированный метод Ньютона:')
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(F_scalar, J_scalar, x_0, e=0.0001, system=False, modified=0,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(F_scalar, J_scalar, x_0, e=0.0001, system=False, modified=0,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
 
-    print('Проверка F(x)==0:')
-    print(F_scalar(x))
-    print()
-    print()
-    print()
+        print(f'Количество операций: {operations}')
+        print()
+
+        print('Проверка F(x)==0:')
+        print(F_scalar(x))
+        print()
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
+        print()
 
     print('Номер 2:')
     print()
@@ -373,26 +380,32 @@ def main():
     print()
 
     timestamp = time.time()
-    # В данном случае при 2х итерациях полным методом - наименьшее время рассчёта
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=500, period=10,
-                                             count_iterations=True, count_operations=True)
+    try:
+        # В данном случае при 2х итерациях полным методом - наименьшее время рассчёта
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=500, period=10,
+                                                 count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
+        print(f'Количество операций: {operations}')
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
     print('Модифицированный метод Ньютона:')
     print()
@@ -428,238 +441,304 @@ def main():
     print()
     print()
 
-    timestamp = time.time()
-
     print('period = 4 (<7):')
     print()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=100, period=1,
-                                             count_iterations=True, count_operations=True)
+    try:
+        timestamp = time.time()
 
-    print('x:')
-    print(x)
-    print()
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=100, period=4,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 7:')
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=4, period=7,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=4, period=7,
+                                                 count_iterations=True, count_operations=True)
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 10 (>7):')
     print()
 
-    timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=4, period=10,
-                                             count_iterations=True, count_operations=True)
+    try:
+        timestamp = time.time()
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=4, period=10,
+                                                 count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество операций: {operations}')
+        print()
+        print()
 
-    print('modified = 7:')
-    print()
-    print()
+        print('modified = 7:')
+        print()
+        print()
 
-    timestamp = time.time()
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 4 (<7):')
     print()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=4,
-                                             count_iterations=True, count_operations=True)
+    timestamp = time.time()
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=4,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 7:')
     print()
-
     timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=7,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=7,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 10 (>7):')
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=10,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=7, period=10,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('modified = 15 (>7):')
     print()
     print()
 
-    timestamp = time.time()
-
     print('period = 4 (<7):')
     print()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=4,
-                                             count_iterations=True, count_operations=True)
+    timestamp = time.time()
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=4,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 7:')
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=7,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=7,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
     print('period = 10 (>7):')
     print()
 
     timestamp = time.time()
-    x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=10,
-                                             count_iterations=True, count_operations=True)
 
-    print('x:')
-    print(x)
-    print()
+    try:
+        x, iterations, operations = solve_newton(count_F, count_J, x_0, system=True, modified=15, period=10,
+                                                 count_iterations=True, count_operations=True)
 
-    print(f'Проверка F(x)==0:')
-    print(count_F(x))
-    print()
+        print('x:')
+        print(x)
+        print()
 
-    print(f'Время работы: {time.time() - timestamp}')
-    print()
+        print(f'Проверка F(x)==0:')
+        print(count_F(x))
+        print()
 
-    print(f'Количество итераций: {iterations}')
-    print()
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
 
-    print(f'Количество операций: {operations}')
-    print()
-    print()
+        print(f'Количество итераций: {iterations}')
+        print()
+
+        print(f'Количество операций: {operations}')
+        print()
+        print()
+    except OverflowError:
+        print('С данными значениям метод не сходится!')
+        print(f'Время работы: {time.time() - timestamp}')
+        print()
+        print()
 
 
 if __name__ == '__main__':
