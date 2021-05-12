@@ -3,7 +3,8 @@ import numpy as np
 from scipy import integrate
 
 
-def newton_cots(f, a, b, p, p_args, moments, optimal=False, step_number=2, r=3, error=10 ** (-6)): # метод Ньютона-Котса
+def newton_cots(f, a, b, p, p_args, moments, optimal=False, step_number=2, r=3,
+                error=10 ** (-6)):  # метод Ньютона-Котса
     L = 2
     S = np.array([], dtype=float)
     H_begin = np.array([], dtype=float)
@@ -25,7 +26,7 @@ def newton_cots(f, a, b, p, p_args, moments, optimal=False, step_number=2, r=3, 
         S = np.append(S, s)
 
     # Метод Эйткена
-    m = int((- math.log((S[2] - S[1]) / (S[1] - S[0]))) / math.log(L))
+    m = (- math.log((S[2] - S[1]) / (S[1] - S[0]))) / math.log(L)
 
     H = []
     for h in H_begin:
@@ -77,7 +78,7 @@ def newton_cots(f, a, b, p, p_args, moments, optimal=False, step_number=2, r=3, 
 
         R = np.linalg.solve(H, S[-r:].transpose())
 
-    return S[-1], R[-1], e
+    return S[-1], R[-1]
 
 
 def P(x, a, b, alpha, beta):
@@ -89,22 +90,34 @@ def F(x):
 
 
 def m0(a, b):
-    return (-2 + 1/3)*(((2.9 - b)**(3/7)) - ((2.9 - a)**(3/7)))
+    return (-2 + 1 / 3) * (((2.9 - b) ** (3 / 7)) - ((2.9 - a) ** (3 / 7)))
+
 
 def m1(a, b):
-    return
+    return (-0.7) * ((b + 6.76667) * ((2.9 - b) ** (3 / 7)) - (a + 6.76667) * ((2.9 - a) ** (3 / 7)))
+
 
 def m2(a, b):
-    return
+    return (-0.411765) * ((b ** 2 + 4.06 * b + 27.4727) * ((2.9 - b) ** (3 / 7)) - (a ** 2 + 4.06 * a + 27.4727) * (
+            (2.9 - a) ** (3 / 7)))
+
 
 def m3(a, b):
-    return
+    return (-0.291667) * ((b ** 3 + 3.58235 * b * b + 14.5444 * b + 98.4168) * ((2.9 - b) ** (3 / 7)) - (
+            a ** 3 + 3.58235 * a * a + 14.5444 * a + 98.4168) * ((2.9 - a) ** (3 / 7)))
+
 
 def m4(a, b):
-    return
+    return (-0.225806) * (
+            (b ** 4 + 3.38333 * (b ** 3) + 12.1203 * (b ** 2) + 49.2084 * b + 332.977) * ((2.9 - b) ** (3 / 7)) - (
+            a ** 4 + 3.38333 * (a ** 3) + 12.1203 * (a ** 2) + 49.2084 * a + 332.977) * ((2.9 - a) ** (3 / 7)))
+
 
 def m5(a, b):
-    return
+    return (-0.184211) * (
+            (b ** 5 + 3.27419 * (b ** 4) + 11.0777 * (b ** 3) + 39.6842 * (b * 2) + 161.118 * b + 1090.23) * (
+            (2.9 - b) ** (3 / 7)) - (a ** 5 + 3.27419 * (a ** 4) + 11.0777 * (a ** 3) + 39.6842 * (
+            a * 2) + 161.118 * a + 1090.23) * ((2.9 - a) ** (3 / 7)))
 
 
 def main():
@@ -115,9 +128,9 @@ def main():
     print()
 
     moments = np.array([
-        2.43062, 6.24668, 16.3083
+        m0, m1, m2
     ])
-    value, error, methodical_error = integral(F, 1.8, 2.9, P, (0, 4 / 7), moments)
+    value, error, methodical_error = newton_cots(F, 1.8, 2.9, P, (0, 4 / 7), moments)
     print(
         f'Значение интеграла с помощью метода Ньютона-Котса, найденное без поиска оптимального шага:'
         f' {value} c погрешностью {error} и методической погрешностью {methodical_error}'
