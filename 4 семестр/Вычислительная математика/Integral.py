@@ -30,13 +30,19 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
     else:
         return S[-1], 0
 
-    H = [[] * len(H_begin)] * len(H_begin)
-    degrees = np.arange(m, m + len(H_begin))[:len(H_begin)]
-    for i in range(len(H_begin)):
-        H[i] = [H_begin[i] ** j for j in degrees]
-    H = np.array(H, dtype=float)
+    #  По методу Ричардсона (не работает)
+    # H = [[] * len(H_begin)] * len(H_begin)
+    # degrees = np.arange(m, m + len(H_begin))[:len(H_begin)]
+    # for i in range(len(H_begin)):
+    #     H[i] = [H_begin[i] ** j for j in degrees]
+    # H = np.array(H, dtype=float)
+    #
+    # R = np.linalg.solve(H, S.transpose())
 
-    R = np.linalg.solve(H, S.transpose())
+    # По правилу Рунге
+    R = np.array([], dtype=float)
+    R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
+    R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
 
     if not optimal:  # без поиска оптимального шага h
         while abs(R[-1]) >= error:
@@ -58,14 +64,18 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
             else:
                 return S[-1], R[-1]
 
-            H = [[] * r] * r
-            dif = len(H_begin) - r
-            degrees = np.arange(m, m + r)[:r]
-            for i in range(len(H_begin) - r, len(H_begin)):
-                H[i - dif] = [H_begin[i] ** j for j in degrees]
-            H = np.array(H, dtype=float)
+            R = np.array([], dtype=float)
+            R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
+            R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
 
-            R = np.linalg.solve(H, S[-r:].transpose())
+            # H = [[] * r] * r
+            # dif = len(H_begin) - r
+            # degrees = np.arange(m, m + r)[:r]
+            # for i in range(len(H_begin) - r, len(H_begin)):
+            #     H[i - dif] = [H_begin[i] ** j for j in degrees]
+            # H = np.array(H, dtype=float)
+            #
+            # R = np.linalg.solve(H, S[-r:].transpose())
 
         return S[-1], R[-1]
 
@@ -84,7 +94,7 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
         return s
 
 
-def gauss(f, a, b, moments, optimal=False, step_number=2, r=3, error=10 ** (-6)):
+def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6)):
     S = np.array([], dtype=float)
     H_begin = np.array([], dtype=float)
     L = 2
@@ -101,7 +111,7 @@ def gauss(f, a, b, moments, optimal=False, step_number=2, r=3, error=10 ** (-6))
             matrix = [[moments_values[(j + s)] for j in range(n)] for s in range(n)]
 
             right_part = [-moments_values[n + s] for s in range(n)]
-            w_coefficients = np.linalg.solve(matrix, right_part)  # что делать, если корни выходят за границы промежутка ???
+            w_coefficients = np.linalg.solve(matrix, right_part)
 
             w_coefficients = [1] + [w_coefficients[i] for i in reversed(range(len(w_coefficients)))]
             roots = np.roots(w_coefficients)
@@ -113,18 +123,24 @@ def gauss(f, a, b, moments, optimal=False, step_number=2, r=3, error=10 ** (-6))
 
         S = np.append(S, s)
 
-    if S[2] != S[1] and S[0] != S[1]:
-        m = -((math.log(abs((S[2] - S[1]) / (S[1] - S[0])))) / math.log(L))
+    if S[-1] != S[-2]:
+        m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
     else:
         return S[-1], 0
 
-    H = [[] * len(H_begin)] * len(H_begin)
-    degrees = np.arange(m, m + len(H_begin))[:len(H_begin)]
-    for i in range(len(H_begin)):
-        H[i] = [H_begin[i] ** j for j in degrees]
-    H = np.array(H, dtype=float)
+    # По методу Ричардсона (не работает)
+    # H = [[] * len(H_begin)] * len(H_begin)
+    # degrees = np.arange(m, m + len(H_begin))[:len(H_begin)]
+    # for i in range(len(H_begin)):
+    #     H[i] = [H_begin[i] ** j for j in degrees]
+    # H = np.array(H, dtype=float)
+    #
+    # R = np.linalg.solve(H, S.transpose())
 
-    R = np.linalg.solve(H, S.transpose())
+    # По правилу Рунге
+    R = np.array([], dtype=float)
+    R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
+    R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
 
     if not optimal:  # без поиска оптимального шага h
         while abs(R[-1]) >= error:
@@ -154,14 +170,18 @@ def gauss(f, a, b, moments, optimal=False, step_number=2, r=3, error=10 ** (-6))
             else:
                 return S[-1], R[-1]
 
-            H = [[] * r] * r
-            dif = len(H_begin) - r
-            degrees = np.arange(m, m + r)[:r]
-            for i in range(len(H_begin) - r, len(H_begin)):
-                H[i - dif] = [H_begin[i] ** j for j in degrees]
-            H = np.array(H, dtype=float)
+            # H = [[] * r] * r
+            # dif = len(H_begin) - r
+            # degrees = np.arange(m, m + r)[:r]
+            # for i in range(len(H_begin) - r, len(H_begin)):
+            #     H[i - dif] = [H_begin[i] ** j for j in degrees]
+            # H = np.array(H, dtype=float)
+            #
+            # R = np.linalg.solve(H, S[-r:].transpose())
 
-            R = np.linalg.solve(H, S[-r:].transpose())
+            R = np.array([], dtype=float)
+            R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
+            R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
 
         return S[-1], R[-1]
 
@@ -212,7 +232,7 @@ def m3(a, b):
 
 
 def m4(a, b):
-    return (-7 / 128100000) * (
+    return (-7 / 158100000) * (
             (5100000 * b ** 4 + 17255000 * b ** 3 + 61813500 * b ** 2 + 250962810 * b + 1698181681) * (
             ((29 / 10) - b) ** (3 / 7)) - (
                     5100000 * a ** 4 + 17255000 * a ** 3 + 61813500 * a ** 2 + 250962810 * a + 1698181681) * (
@@ -220,12 +240,12 @@ def m4(a, b):
 
 
 def m5(a, b):
-    return (-7 / 12015600000) * (
+    return (-7) * (
             (
-                    316200000 * b ** 5 + 1035300000 * b ** 4 + 3502765000 * b ** 3 + 12548140500 * b * 2 + 50945450430 * b + 344730881243) * (
+                    316200000.0 * b ** 5 + 1035300000.0 * b ** 4 + 3502765000.0 * b ** 3 + 12548140500.0 * b ** 2 + 50945450430.0 * b + 344730881243.0) * (
                     ((29 / 10) - b) ** (3 / 7)) - (
-                    316200000 * a ** 5 + 1035300000 * a ** 4 + 3502765000 * a ** 3 + 12548140500 * a * 2 + 50945450430 * a + 344730881243) * (
-                    ((29 / 10) - a) ** (3 / 7)))
+                    316200000.0 * a ** 5 + 1035300000.0 * a ** 4 + 3502765000.0 * a ** 3 + 12548140500.0 * a ** 2 + 50945450430.0 * a + 344730881243.0) * (
+                    ((29 / 10) - a) ** (3 / 7))) * (1 / 12015600000.0)
 
 
 def main():
@@ -235,20 +255,20 @@ def main():
     print(f'Точное значение интеграла: {real}')
     print()
 
-    # moments = np.array([
-    #     m0, m1, m2
-    # ])
-    # value, error = newton_cots(F, 1.8, 2.9, moments)
-    # print(
-    #     f'Значение интеграла с помощью метода Ньютона-Котса, найденное без поиска оптимального шага:'
-    #     f' {value} c погрешностью {error}'
-    # )
-    # print()
-    # value = newton_cots(F, 1.8, 2.9, moments, optimal=True)
-    # print(
-    #     f'Значение интеграла с помощью метода Ньютона-Котса, найденное c поиском оптимального шага:'
-    #     f' {value} c погрешностью {abs(value - real)}'
-    # )
+    moments = np.array([
+        m0, m1, m2
+    ])
+    value, error = newton_cots(F, 1.8, 2.9, moments)
+    print(
+        f'Значение интеграла с помощью метода Ньютона-Котса, найденное без поиска оптимального шага:'
+        f' {value} c погрешностью {error}'
+    )
+    print()
+    value = newton_cots(F, 1.8, 2.9, moments, optimal=True)
+    print(
+        f'Значение интеграла с помощью метода Ньютона-Котса, найденное c поиском оптимального шага:'
+        f' {value} c погрешностью {abs(value - real)}'
+    )
 
     print()
     moments = np.array([
@@ -260,11 +280,11 @@ def main():
         f' {value} c погрешностью {error}'
     )
     print()
-    # value = gauss(F, 1.8, 2.9, moments, optimal=True)
-    # print(
-    #     f'Значение интеграла с помощью метода Гаусса, найденное c поиском оптимального шага: '
-    #     f'{value} c погрешностью {abs(value - real)}')
-    # print()
+    value = gauss(F, 1.8, 2.9, moments, optimal=True)
+    print(
+        f'Значение интеграла с помощью метода Гаусса, найденное c поиском оптимального шага: '
+        f'{value} c погрешностью {abs(value - real)}')
+    print()
 
 
 if __name__ == '__main__':
