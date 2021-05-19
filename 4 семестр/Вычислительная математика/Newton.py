@@ -217,7 +217,7 @@ def inverse_matrix(L, U, P, Q, count_operations=False):
     return E
 
 
-def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, count_iterations=False,
+def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, max_iterations=1000, count_iterations=False,
                  count_operations=False):
     """
     x_(k+1) = x^k - ([F'(x_k)]^-1)*F(x_k)
@@ -227,6 +227,7 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
 
     k = 1
     iterations = 1
+    converges = True
 
     if not system:
         '''Для одного скалярного уравнения'''
@@ -239,7 +240,7 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
 
         k += 3
 
-        while (abs(x - x_previous) >= e) and (iterations < modified):
+        while (abs(x - x_previous) >= e) and (iterations < modified) and iterations < max_iterations:
             x_previous = x
 
             if iterations % period == 0:
@@ -250,11 +251,15 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
             k += 3
             iterations += 1
 
-        while abs(x - x_previous) >= e:
+        while abs(x - x_previous) >= e and iterations < max_iterations:
             x_previous = x
             x = x_previous - (F(x_previous) * J_inv)
             k += 3
             iterations += 1
+
+        if iterations >= max_iterations:
+            converges = False
+            print("Достигнуто максимальное число итераций!")
 
     else:
         '''Для системы скалярных уравнений'''
@@ -270,7 +275,8 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
         x = x_previous + temp
         k += n + 1
 
-        while (np.linalg.norm((x - x_previous), ord=np.inf) >= e) and (iterations < modified):
+        while (np.linalg.norm((x - x_previous), ord=np.inf) >= e) and (
+                iterations < modified) and iterations < max_iterations:
             x_previous = x.copy()
 
             if iterations % period == 0:
@@ -282,12 +288,16 @@ def solve_newton(F, J, x, e=10 ** (-9), system=False, modified=0, period=1, coun
             iterations += 1
             k += 1 + n
 
-        while np.linalg.norm((x - x_previous), ord=np.inf) >= e:
+        while np.linalg.norm((x - x_previous), ord=np.inf) >= e and iterations < max_iterations:
             x_previous = x.copy()
             temp, n = solve_LU(L, U, P, Q, -F(x_previous), count_operations=True)
             x = x_previous + temp
             iterations += 1
             k += 1 + n
+
+        if iterations >= max_iterations:
+            converges = False
+            print("Достигнуто максимальное число итераций!")
 
     if count_iterations:
         if count_operations:
