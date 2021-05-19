@@ -3,7 +3,7 @@ import numpy as np
 
 
 def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
-                error=10 ** (-9)):  # метод Ньютона-Котса
+                error=10 ** (-6)):  # метод Ньютона-Котса
     k = -1
     L = 2
     S = np.array([], dtype=float)
@@ -28,7 +28,6 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
 
     if S[2] != S[1] and S[0] != S[1]:
         m = -((math.log(abs((S[2] - S[1]) / (S[1] - S[0])))) / math.log(L))
-        print(m)
     else:
         return S[-1], 0
 
@@ -39,8 +38,7 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
 
     if not optimal:  # без поиска оптимального шага h
         while abs(R[-1]) >= error:
-            k += 1
-            h = round(H_begin[-1] / L, 10) / (L ** k)
+            h = round(H_begin[-1] / L, 10)
             H_begin = np.append(H_begin, h)
             x = np.arange(a, b, h)
             x = np.append(x, b)
@@ -55,6 +53,7 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
 
             if S[-1] != S[-2]:
                 m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
+                # print(m)
                 if m < len(moments):
                     continue
             else:
@@ -65,10 +64,9 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
 
     else:  # с поиском оптимального шага h
         while abs(R[-1]) >= error:
-            k += 1
-            h = round(H_begin[-1] * ((error / abs(R[-1])) ** (1 / m)), 10) / (L ** k)
+            h = round(H_begin[-1] * ((error / abs(R[-1])) ** (1 / m)), 10)
 
-            H_behin = np.append(H_begin, h * (L ** 2))
+            H_begin = np.append(H_begin, h * (L ** 2))
             H_begin = np.append(H_begin, h * L)
             H_begin = np.append(H_begin, h)
 
@@ -86,20 +84,22 @@ def newton_cots(f, a, b, moments, optimal=False, step_number=2, r=3,
                 S = np.append(S, s)
 
             if S[-1] != S[-2]:
-                m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
-                if m < len(moments):
+                m_1 = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
+                if m_1 < len(moments) - 0.5:
                     continue
-                print(m)
+                else:
+                    m = m_1
             else:
                 break
 
             R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
             R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
 
+    # print((b - a) / H_begin[-1])
     return S[-1], R[-1]
 
 
-def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6)):
+def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-9)):
     S = np.array([], dtype=float)
     H_begin = np.array([], dtype=float)
     L = 2
@@ -131,7 +131,6 @@ def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6))
 
     if S[-1] != S[-2]:
         m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
-        print(m)
     else:
         return S[-1], 0
 
@@ -142,8 +141,7 @@ def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6))
 
     if not optimal:  # без поиска оптимального шага h
         while abs(R[-1]) >= error:
-            k += 1
-            h = round(H_begin[-1] / L, 10) / (L ** k)
+            h = round(H_begin[-1] / L, 10)
             H_begin = np.append(H_begin, h)
             x = np.arange(a, b, h)
             x = np.append(x, b)
@@ -166,9 +164,9 @@ def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6))
 
             if S[-1] != S[-2]:
                 m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
+                # print(m)
                 if m < len(moments):
                     continue
-                print(m)
             else:
                 return S[-1], R[-1]
 
@@ -178,10 +176,10 @@ def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6))
 
     else:  # с поиском оптимального шага h
         while abs(R[-1]) >= error:
-            k += 1
-            h = round(H_begin[0] * ((error / abs(R[0])) ** (1 / m)), 10) / (L ** k)
+            h = round(H_begin[-1] * ((error / abs(R[-1])) ** (1 / m)), 10)
+            # print((b-a)/h, ' h')
 
-            H_behin = np.append(H_begin, h * (L ** 2))
+            H_begin = np.append(H_begin, h * (L ** 2))
             H_begin = np.append(H_begin, h * L)
             H_begin = np.append(H_begin, h)
 
@@ -206,15 +204,18 @@ def gauss(f, a, b, moments, optimal=False, step_number=1, r=3, error=10 ** (-6))
                 S = np.append(S, s)
 
             if S[-1] != S[-2]:
-                m = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
-                if m < len(moments):
+                m_1 = -((math.log(abs((S[-1] - S[-2]) / (S[-2] - S[-3])))) / math.log(L))
+                if m_1 < len(moments) - 1:
                     continue
-                print(m)
+                else:
+                    m = m_1
+                    # print(m)
             else:
                 break
 
             R = np.append(R, (S[-1] - S[-2]) / (1 - L ** (-m)))
             R = np.append(R, (S[-1] - S[-2]) / ((L ** m) - 1))
+    # print((b - a) / H_begin[-1])
 
     return S[-1], R[-1]
 
