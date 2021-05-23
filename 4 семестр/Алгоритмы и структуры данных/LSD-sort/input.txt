@@ -1,4 +1,6 @@
-3 4 1
-abbb
-aaba
+4 5 5
+abba
+aaab
 bbaa
+abbb
+baba
