@@ -15,8 +15,6 @@ class BTreeSet:
 
         node = root
         while True:
-            assert len(node.keys) < self.maxkeys
-            assert node is root or len(node.keys) >= self.minkeys
             found, index = node.search(obj)
             if found:
                 return
@@ -59,8 +57,6 @@ class BTreeSet:
         found, index = root.search(obj)
         node = root
         while True:
-            assert len(node.keys) <= self.maxkeys
-            assert node is root or len(node.keys) > self.minkeys
             if node.is_leaf():
                 if found:
                     node.remove_key(index)
@@ -78,7 +74,6 @@ class BTreeSet:
                     else:
                         node.merge_children(self.minkeys, index)
                         if node is root and len(root.keys) == 0:
-                            assert len(root.children) == 1
                             self.root = root = left
                         node = left
                         index = self.minkeys
@@ -86,7 +81,6 @@ class BTreeSet:
                 else:
                     child = node.ensure_child_remove(self.minkeys, index)
                     if node is root and len(root.keys) == 0:
-                        assert len(root.children) == 1
                         self.root = root = root.children[0]
                     node = child
                     found, index = node.search(obj)
@@ -106,7 +100,6 @@ class BTreeSet:
         while len(stack) > 0:
             node, index = stack.pop()
             if node.is_leaf():
-                assert index == 0
                 yield from node.keys
             else:
                 yield node.keys[index]
