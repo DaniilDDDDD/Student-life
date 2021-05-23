@@ -11,15 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77af278f-f139-4722-a14a-66596d811b43" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Student-life.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Student-life.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree(stolen).py" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/Btree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4 семестр/Вычислительная математика/Integral.py" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Вычислительная математика/Integral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4 семестр/Вычислительная математика/Newton.py" beforeDir="false" afterPath="$PROJECT_DIR$/4 семестр/Вычислительная математика/Newton.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +33,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/Slim_Client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Python.Integral">
+  <component name="RunManager" selected="Python.B-tree">
     <configuration name="B-tree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Student-life" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,9 +130,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.B-tree" />
         <item itemvalue="Python.Integral" />
         <item itemvalue="Python.Newton" />
-        <item itemvalue="Python.B-tree" />
         <item itemvalue="Python.Btree" />
       </list>
     </recent_temporary>
@@ -157,6 +152,7 @@
       <workItem from="1621004525738" duration="20513000" />
       <workItem from="1621081179451" duration="11575000" />
       <workItem from="1621266100507" duration="45000" />
+      <workItem from="1621772283976" duration="2672000" />
     </task>
     <servers />
   </component>
@@ -184,38 +180,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="662" y="290" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1621266144147" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1621106277105">
+    <state width="1877" height="585" key="GridCell.Tab.0.bottom" timestamp="1621777103606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1621106277105">
+    <state width="1877" height="585" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621777103606" />
+    <state width="1877" height="585" key="GridCell.Tab.0.center" timestamp="1621777103606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1621106277105">
+    <state width="1877" height="585" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621777103606" />
+    <state width="1877" height="585" key="GridCell.Tab.0.left" timestamp="1621777103606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1621106277105">
+    <state width="1877" height="585" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621777103606" />
+    <state width="1877" height="585" key="GridCell.Tab.0.right" timestamp="1621777103606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1621106277105">
+    <state width="1877" height="585" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621777103606" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1621776170403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1621106277105">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621776170403" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1621776170403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1621106277105">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621776170403" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1621776170403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1621106277105">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621776170403" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1621776170403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621106277105" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621776170403" />
     <state x="667" y="76" width="585" height="888" key="find.popup" timestamp="1621021424506">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -329,6 +325,21 @@
           <line>197</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py</url>
+          <line>238</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py</url>
+          <line>240</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree/B-tree.py</url>
+          <line>230</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -342,7 +353,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/$Integral.coverage" NAME="Integral Coverage Results" MODIFIED="1621103251389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Вычислительная математика" />
     <SUITE FILE_PATH="coverage/$btree_stolen_2_.coverage" NAME="btree(stolen_2) Coverage Results" MODIFIED="1621025715178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree" />
-    <SUITE FILE_PATH="coverage/$B_tree.coverage" NAME="B-tree Coverage Results" MODIFIED="1621094995832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree" />
+    <SUITE FILE_PATH="coverage/$B_tree.coverage" NAME="B-tree Coverage Results" MODIFIED="1621777100289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Алгоритмы и структуры данных/B-tree" />
     <SUITE FILE_PATH="coverage/$Newton.coverage" NAME="Newton Coverage Results" MODIFIED="1621096449827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Вычислительная математика" />
     <SUITE FILE_PATH="coverage/Student_life$Newton.coverage" NAME="Newton Coverage Results" MODIFIED="1620812071015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/4 семестр/Вычислительная математика" />
   </component>
