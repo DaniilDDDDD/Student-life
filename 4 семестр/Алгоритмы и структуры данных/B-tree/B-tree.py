@@ -35,6 +35,18 @@ class BTreeSet:
                         child = node.children[index + 1]
                 node = child
 
+    def exists(self, key, root=None):
+        if root is None:
+            root = self.root
+
+        if root.search(key)[0]:
+            return True
+        if root.children:
+            for child in root.children:
+                if self.exists(key, child):
+                    return True
+        return False
+
     def remove(self, obj):
         if not self._remove(obj):
             raise KeyError(str(obj))
@@ -200,17 +212,11 @@ def main():
         line = input_file.readline().split()
         n = int(line[0])
 
-        line = input_file.readline().split()
-        count = 1
-        while line[0] == '-':
-            line = input_file.readline().split()
-            count += 1
-
         tree = BTreeSet(3)
 
         with open('output.txt', 'w') as output_file:
 
-            for i in range(n - count):
+            for i in range(n):
                 line = input_file.readline().split()
                 if line[0] == '+':
                     tree.add(float(line[1]))
@@ -224,9 +230,9 @@ def main():
                         keys = " ".join(map(str, tree.root.keys))
                         output_file.write(f'{length}: ' + keys + '\n')
                     except KeyError:
-                        output_file.write('Key does not exist!')
+                        output_file.write('Key does not exist!' + '\n')
                 elif line[0] == '?':
-                    output_file.write(str(tree.root.search(float(line[1]))[0]) + '\n')
+                    output_file.write(str(tree.exists(float(line[1]))) + '\n')
 
 
 if __name__ == '__main__':
