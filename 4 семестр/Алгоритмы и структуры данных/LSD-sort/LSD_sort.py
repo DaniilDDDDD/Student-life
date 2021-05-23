@@ -41,7 +41,7 @@ def main():
         for line in input_f:
             lines.append(list(line[:m - 1]))
         lines = np.array(lines).transpose()
-    print(lines)
+
     out = lsd_sort(n, m, k, lines)
 
     with open('output.txt', 'w') as output_f:
