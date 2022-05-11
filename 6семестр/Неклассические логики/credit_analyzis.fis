@@ -1,0 +1,48 @@
+[System]
+Name='credit_analyzis'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Доход'
+Range=[1 10]
+NumMFs=3
+MF1='Низкий':'zmf',[3 5]
+MF2='Средний':'trapmf',[3 5 6 8]
+MF3='Высокий':'sigmf',[4 7]
+
+[Input2]
+Name='Активы'
+Range=[1 10]
+NumMFs=3
+MF1='низкие':'trimf',[-2.75 1 4.75]
+MF2='средние':'trapmf',[2 5 6 9]
+MF3='mf3':'trimf',[6.25 10 13.75]
+
+[Input3]
+Name='Выплаты'
+Range=[1 10]
+NumMFs=3
+MF1='низкие':'linzmf',[2.5 5.5]
+MF2='высокие':'linsmf',[5.5 8.5]
+MF3='средние':'trapmf',[2 5 6 9]
+
+[Output1]
+Name='Кредитоспособность'
+Range=[1 10]
+NumMFs=5
+MF1='очень_низкая':'zmf',[1 4]
+MF2='очень_высокая':'sigmf',[3 8.5]
+MF3='низкая':'gaussmf',[1 3.5]
+MF4='средняя':'gaussmf',[1 5.5]
+MF5='высокая':'gaussmf',[1 7.5]
+
+[Rules]
