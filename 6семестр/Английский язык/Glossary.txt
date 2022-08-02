@@ -1,0 +1,19 @@
+Software - collection of instructions that tell a computer how to work.
+Hardware - includes the physical parts of a computer, such as the case, central processing unit, random access memory, monitor, mouse, keyboard, computer data storage, graphics card, sound card, speakers and motherboard.
+Siloed, heterogeneous- processes are siloed they are exacuted independently.
+thread - In computer science, a thread of execution is the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system.
+compatible - two things are compatible if they can exist and work together.
+general-purpose – some machine can execute wide spectre of commands.
+integrated circuit - a set of electronic circuits on one small flat piece (or "chip") of semiconductor material, usually silicon.
+emphasis - accent
+myriad - myriad of something = huge number of something
+deviate - to be different from some standart.
+formidable - huge or imposing
+cease - to stop something
+deficiency - lack of something
+endeavor - try, effort
+to doom - condemn
+surreptitiously - make something so that no one knows that you did it
+fabricating - process of creating huge number of something
+precision - accuracy
+to lay down - to found something
