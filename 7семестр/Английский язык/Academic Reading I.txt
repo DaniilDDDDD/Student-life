@@ -1,0 +1,49 @@
+ARTICLE - https://cacm.acm.org/magazines/2022/7/262069-brain-implants-get-real/fulltext
+
+GLOSSARY
+paralysis - паралич
+impairment - нарушение
+pondered - задумывались
+chairman - председатель
+inflection point - переломная точка
+viability - жизнеспособность
+material science - материаловедение
+notions - представления
+paraplegics - паралич нижних конечностей
+to fire - запускать
+prosthetic limb - протез конечности
+spinal cord - спинной мозг
+stroke - инсульт
+hurdles - препятствия
+retina - сетчатка
+visual cortex of the brain - зрительная кора головного мозга
+to augment - увеличить
+pinpointing - выявление
+elicit  - выявлять
+neocortex - новая кора головного мозга
+prosthetics - протезирование
+conventional - общепринятый
+cranium - череп
+daunting - устрашающий
+immersed - погруженный
+cerebrospinal - спинномозговой
+nebulous - туманный
+
+SUMMARY
+Most of us never think about how the human brain works until something goes terribly wrong. A person may lose sight or hearing, experience cognitive decline due to disease or aging, or suffer paralysis or damage due to an accident or some other type of trauma. Unfortunately, when impairment occurs, it often is irreversible.
+
+Now, the idea of implanting microchips inside the human head is becoming real and such chips could restore lost functionality.  Development of such technologies lead to simultaneous advances across many areas of science, engineering, and medicine—the results are transforming our notions of brain-computer interfaces.
+
+You should not think that mind control and superhuman powers are the stuff of today's brain implants - now such systems are designed to restore lost sight, hearing, or physical or mental functionality. It could also serve to augment imagery for those with normal vision.
+
+For example, in Stanford University's BrainGate program, paraplegics and stroke patients can operate a computer mouse using experimental BCIs. As a person thinks and fires neurons, a chip translates the signal into actual movement within a computer or on a prosthetic limb. This, among other things, allows someone with amyotrophic lateral sclerosis (a neuro-degenerative disease that affects nerve cells in the brain and spinal cord) or a brainstem injury to speak by controlling a cursor and virtual keyboard on a computer screen. The technology currently converts thoughts to text at a rate of about 90 characters per minute.
+
+*Then there is Elon Musk's company, Neuralink. Its neural implant allowed a macaque monkey named Pager to play Pong using only its thoughts.e Researchers implanted a neural recording and data transmission device with 1,024 electrodes, called N1 Link, in both the left and right motor cortex of the monkey's brain. After decoding the brain signals and pinpointing the specific neurons that respond to motion, they equipped the monkey with a functioning BCI that measured the speed of upcoming or intended movements.
+
+Neural engineers don't need an exact understanding of the brain to stimulate the right responses. Researchers have learned to decode signals and match them with the density of electrodes required to transmit the right information and elicit the desired response. 
+
+Neural implants sit just beneath the surface of the skull—barely touching the surface of the brain,  sending signals not deep into neocortex. Essentially, the implantable device serves as a translator between specific nerve cells in the brain and the electrical signals traveling to and from devices, including conventional computers, biomechanical limbs, and various types of prosthetics.
+
+Neural implants must be biocompatible and somewhat flexible, yet resistant to moving around and causing damage to the brain. They must avoid corrosion in the salty fluids of the brain and remain biocompatible for years—or perhaps, even a human lifes-pan. There are also issues related to transistor size, the shapes of chips, and the ability to transmit the required data through a wireless interface. 
+
+Hearing and vision are based on very specific, narrow sets of neurons that are well understood by scientists. In contrast, conditions such as dementia, addiction, and depression are far more nebulous. 

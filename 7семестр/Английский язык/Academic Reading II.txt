@@ -1,0 +1,51 @@
+ARTICLE - https://cacm.acm.org/magazines/2021/12/256929-the-hardware-lottery/fulltext
+
+software – программное обеспечение
+hardware- аппаратное обеспечение
+siloed – разрозненный
+heterogeneous – неоднородный
+thread – поток
+compatible – совместимый
+general-purpose – общего назначения
+integrated circuit – интегральная схема
+emphasis – акцент
+myriad – мириады
+deviate – отклониться
+formidable – значительный, внушительный
+cease – прекратить
+deficiency – недостаток
+endeavor – попытка
+to doom – обречь
+surreptitiously – тайком
+fabricating – изготовление
+precision – точность
+to lay down – закладывать (основы)
+convolutional - свёрточный
+backpropagation - обратное распространение
+cumbersome - громоздкий
+
+SUMMARY
+
+First computers were very specialized. Software was written exclusively for certain model of computer.
+The general-purpose computer era crystallized in 1969, when Gordan Moore wrote his mind in one
+magazine – he said that the number of transistors on an integrated circuit could be doubled every two
+years. Prediction held and motivated a remarkable decline in the cost of transforming energy into
+information over the next 50 years. Even for tasks which demanded higher performance, the benefits of
+moving to specialized hardware could be quickly eclipsed by the next generation of general-purpose
+hardware with ever-growing computing power.
+
+There is one essential principle: “a deficiency in any one of a number of factors dooms an endeavor to
+failure” (Anna Karenina principle). Most computer science breakthroughs follow the Anna Karenina
+principle. hardware lottery—avoiding possible points of failure in downstream hardware and software
+choices.
+
+Charles Babbage was a computer pioneer who designed a machine that could be programmed, but first
+such machines were build much later – in 20th sentury.
+
+The most salient example of the damage caused by not winning the hardware lottery is the delayed
+recognition of deep neural networks as a promising direction of research becfuse algorithms 
+were invented few decades before this research direction gained popularity. Such researches was 
+impossible cause CPUs was uneficient in parallel computation. All chaged in 2000s when people 
+start widely using GPUs which are better at parallelizing.
+
+Software also plays a role in deciding which research ideas win and which ones lose. For axample, there are coupde of programming languages which lost their popularity as need for more abstract instrumetns appeared.
